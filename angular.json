@@ -24,9 +24,21 @@
               "src/assets"
             ],
             "styles": [
+              "src/assets/bootstrap/css/bootstrap.min.css",
+              "src/assets/bootstrap/css/bootstrap-responsive.min.css",
+              "src/assets/css/theme.css",
+              "src/assets/images/icons/css/font-awesome.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "src/assets/scripts/jquery-1.9.1.min.js",
+              "src/assets/scripts/jquery-ui-1.10.1.custom.min.js",
+              "src/assets/bootstrap/js/bootstrap.min.js",
+              "src/assets/scripts/flot/jquery.flot.js",
+              "src/assets/scripts/flot/jquery.flot.resize.js",
+              "src/assets/scripts/datatables/jquery.dataTables.js",
+              "src/assets/scripts/common.js"
+            ]
           },
           "configurations": {
             "production": {

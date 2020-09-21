@@ -7,102 +7,145 @@
             </div>
             <div class="module-body">
                 <br />
-                <form class="form-horizontal row-fluid">
+                <form (ngSubmit)="onSubmit(f)" #f="ngForm" class="form-horizontal row-fluid">
                     <div class="control-group">
-                        <label class="control-label" for="basicinput">Basic Input</label>
+                        <label class="control-label" for="basicinput">Name</label>
                         <div class="controls">
-                            <input type="text" id="basicinput" placeholder="Type something here..." class="span8">
-                            <span class="help-inline">Minimum 5 Characters</span>
+                            <input [(ngModel)]="user.name" name="name" type="text" id="basicinput" placeholder="Type something here..." class="span8" #name="ngModel" required>
+                            <div *ngIf="((!name.valid && name.touched) || f.submitted) 
+                                && name.invalid">Please enter your name</div>
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" for="basicinput">Tooltip Input</label>
+                        <label class="control-label" for="basicinput">Mobile</label>
                         <div class="controls">
-                            <input data-title="A tooltip for the input" type="text" placeholder="Hover to view the tooltip…" data-original-title="" class="span8 tip">
+                            <input [(ngModel)]="user.mobile" name="mobile" type="text" placeholder="Type something here..." data-original-title="" class="span8 tip" #mobile="ngModel" required>
+                            <div *ngIf="((!mobile.valid && mobile.touched) || f.submitted)
+                            && mobile.invalid">Please enter your mobile no</div>
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" for="basicinput">Prepended Input</label>
+                        <label class="control-label" for="basicinput">Email</label>
                         <div class="controls">
-                            <div class="input-prepend">
-                                <span class="add-on">#</span><input class="span8" type="text" placeholder="prepend">       
-                            </div>
+                            <input [(ngModel)]="user.email" #email="ngModel" ngModel name="email" type="text" placeholder="Type something here..." data-original-title="" class="span8 tip" required email>
+                            <div *ngIf="((!email.valid && email.touched) || f.submitted)
+                            && email.invalid">Please enter the valid email</div>
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label" for="basicinput">Appended Input</label>
+                        <label class="control-label" for="basicinput">Country</label>
                         <div class="controls">
-                            <div class="input-append">
-                                <input type="text" placeholder="5.000" class="span8"><span class="add-on">$</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="basicinput">Dropdown Button</label>
-                        <div class="controls">
-                            <div class="dropdown">
-                                <a class="dropdown-toggle btn" data-toggle="dropdown" href="#">Dropdown Button <i class="icon-caret-down"></i></a>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                    <li><a href="#">First Row</a></li>
-                                    <li><a href="#">Second Row</a></li>
-                                    <li><a href="#">Third Row</a></li>
-                                    <li><a href="#">Fourth Row</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="control-group">
-                        <label class="control-label" for="basicinput">Dropdown</label>
-                        <div class="controls">
-                            <select tabindex="1" data-placeholder="Select here.." class="span8">
-                                <option value="">Select here..</option>
-                                <option value="Category 1">First Row</option>
-                                <option value="Category 2">Second Row</option>
-                                <option value="Category 3">Third Row</option>
-                                <option value="Category 4">Fourth Row</option>
+                            <select [(ngModel)]="user.country" name="country" (change)="onCountryChange($event.target.value)" tabindex="1" class="span8" #country="ngModel" required>
+                                <option value="" selected>Select here..</option>
+                                <option *ngFor="let country of countries" value="{{country.id}}">{{country.name}}</option> 
                             </select>
+                            <div *ngIf="((!country.valid && country.touched) || f.submitted) && country.invalid ">Please select the country</div>
                         </div>
                     </div>
 
                     <div class="control-group">
-                        <label class="control-label">Radiobuttons</label>
+                        <label class="control-label" for="basicinput">State</label>
                         <div class="controls">
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
-                                Option one
-                            </label> 
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-                                Option two
-                            </label> 
-                            <label class="radio">
-                                <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">
-                                Option three
+                            <select [(ngModel)]="user.state" name="state" (change)="onStateChange($event.target.value)" tabindex="1" class="span8" #state="ngModel" required>
+                                <option value="">Select here..</option>
+                                <option *ngFor="let state of states" value="{{state.id}}">{{state.name}}</option> 
+                            </select>
+                            <div *ngIf="((!state.valid && state.touched) || f.submitted) && state.invalid ">Please select the state</div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="basicinput">City</label>
+                        <div class="controls">
+                            <select [(ngModel)]="user.city" name="city" tabindex="1" class="span8" #city="ngModel" required>
+                                <option value="" selected>Select here..</option>
+                                <option *ngFor="let city of cities" value="{{city.id}}">{{city.name}}</option> 
+                            </select>
+                            <div *ngIf="((!city.valid && city.touched) || f.submitted) && city.invalid ">Please select the city</div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label">Hobbies</label>
+                        <div class="controls">
+                            <label class="radio ">
+                                <input [(ngModel)]="user.hobbies" name="hobbies" #hobbies="ngModel" type="radio" id="optionsRadios1" 
+                                required value="1">
+                                Cricket
                             </label>
+                            <label class="radio">
+                                <input type="radio" [(ngModel)]="user.hobbies" #hobbies="ngModel" name="hobbies" id="optionsRadios2" 
+                                required value="2">
+                                Chess
+                            </label>
+                            <label class="radio">
+                                <input type="radio" [(ngModel)]="user.hobbies" #hobbies="ngModel" name="hobbies" id="optionsRadios3" 
+                                required value="3">
+                                Reading
+                            </label>
+                            <div *ngIf="f.submitted && hobbies.invalid"><b>Please select the hobbies</b></div>
                         </div>
                     </div>
-                    <div class="control-group">
-                        <label class="control-label" for="basicinput">Textarea</label>
+
+                    <div class="control-group" ngModelGroup="userEducation" #userEducation="ngModelGroup">
+                        <label class="control-label">Education</label>
                         <div class="controls">
-                            <textarea class="span8" rows="5"></textarea>
+                            <label class="checkbox" *ngFor="let item of checkboxesDataList;let indexOfelement=index;">
+                                <input name="education" type="checkbox" ngModel id="optionsRadios1" value="{{indexOfelement}}"
+                                (change)="changeSelection($event)" [checked]="item.isChecked">{{item.text}}
+                            </label>
+                            <div *ngIf="((userEducation.touched || f.submitted || userEducation.dirty) && showerror)"><br/><b>Please select the education</b></div>
                         </div>
                     </div>
 
                     <div class="control-group">
+                        <label class="control-label" for="basicinput">Address</label>
                         <div class="controls">
+                            <textarea [(ngModel)]="user.address" name="address" class="span8" rows="5" #address="ngModel" required></textarea>
+                            <div *ngIf="((!address.valid && address.touched) || f.submitted) && address.invalid ">Please enter your full address</div>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <label class="control-label" for="basicinput">Academics</label>
+                        <div class="controls span8">
+                            <table class='table table-striped' id='academic'>
+                                <thead>
+                                    <tr>
+                                        <th>Institute Name</th>
+                                        <th>Year</th>
+                                        <th>Percentage</th>
+                                        <th>Action</th>
+                                        <th><button class="btn btn-primary" type="button" (click)="addRecord()">Add more</button></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of usersdata; let i=index">
+                                        <td><input type="text" name="institute_name{{i}}" [(ngModel)]="user.institute" style="width: 100px;">
+                                        </td>
+                                        <td><input type="text" name="year{{i}}" [(ngModel)]="user.year" style="width: 100px;"></td>
+                                        <td><input type="text" name="percentage{{i}}" [(ngModel)]="user.percentage" style="width: 100px;"></td>
+                                        <td>
+                                            <button class="btn btn-danger" type="button" (click)="deleteRecord(i)">Delete</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <!-- [disabled]="!f.valid " -->
                             <button type="submit" class="btn">Submit Form</button>
                         </div>
                     </div>
                 </form>
             </div>
         </div>
-
-
-
-    </div><!--/.content-->
-</div><!--/.span9-->
+    </div>
+    <!--/.content-->
+</div>
+<!--/.span9-->

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DatatableService } from '../appservices/datatable.service';
+import { UserService } from '../appservices/user.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -8,10 +8,10 @@ import { DatatableService } from '../appservices/datatable.service';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor(public datatableService: DatatableService) { }
+  constructor(public userService: UserService) { }
 
   ngOnInit(): void {
-    this.datatableService.datatableInit();
+    this.userService.datatableInit();
   }
 
 }

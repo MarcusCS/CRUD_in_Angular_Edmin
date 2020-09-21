@@ -9,12 +9,14 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { AdduserComponent } from './adduser/adduser.component';
 import { SidebarComponent } from './layouts/sidebar/sidebar.component';
 import { ListusersComponent } from './listusers/listusers.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http'
 
 const appRoutes: Routes = [
   {path: '', component: DashboardComponent},
   {path: 'adduser', component: AdduserComponent},
-  {path: 'listusers',component: ListusersComponent}
-  // {path: ''}
+  {path: 'listusers',component: ListusersComponent},
+  {path: 'editUser/:id',component: AdduserComponent}
 ]; 
 
 @NgModule({
@@ -29,7 +31,9 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    FormsModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

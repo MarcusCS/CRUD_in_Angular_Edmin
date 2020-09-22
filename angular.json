@@ -31,7 +31,6 @@
                             "src/styles.css"
                         ],
                         "scripts": [
-
                             "src/assets/scripts/flot/jquery.flot.js",
                             "src/assets/scripts/flot/jquery.flot.resize.js",
                             "src/assets/scripts/datatables/jquery.dataTables.js",

@@ -74,20 +74,19 @@ export class ListusersComponent implements OnInit {
   }
   
   deleteUser(id) {
-    // if (confirm("Do you Really want to Delete")) {
-    //   this.userService.deleteUser(id).subscribe(
-    //     (data: any) => {
-    //       if (data.success) {
-    //         $('#userList').DataTable().ajax.reload();
-    //         alert(data.message);
-    //       }
-    //       else {
-    //         alert("Something Went Wrong");
-    //       }
-    //     }
-    //   );
-    // }
-    $('#userList').DataTable().ajax.reload();
+    if (confirm("Do you Really want to Delete")) {
+      this.userService.deleteUser(id).subscribe(
+        (data: any) => {
+          if (data.success) {
+            $('#userList').DataTable().ajax.reload();
+            alert(data.message);
+          }
+          else {
+            alert("Something Went Wrong");
+          }
+        }
+      );
+    }
   }
 
  
